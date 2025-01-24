@@ -1,0 +1,41 @@
+{
+    "name": "arimolzer/ipstack",
+    "description": "Laravel package for geolocation using the IPStack API",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ari Molzer",
+            "email": "ari@molzertech.com",
+            "homepage": "https://www.arimolzer.com"
+        }
+    ],
+    "homepage": "https://github.com/arimolzer/ipstack",
+    "keywords": ["Geolocation", "IPStack", "IP Address Lookup"],
+    "require": {
+        "illuminate/support": "~9|~10|~11"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~9|~10|~11",
+        "orchestra/testbench": "~9"
+    },
+    "autoload": {
+        "psr-4": {
+            "Arimolzer\\IPStack\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Arimolzer\\IPStack\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Arimolzer\\IPStack\\IPStackServiceProvider"
+            ],
+            "aliases": {
+                "IPStack": "Arimolzer\\IPStack\\Facades\\IPStack"
+            }
+        }
+    }
+}
