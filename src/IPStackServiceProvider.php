@@ -13,11 +13,6 @@ class IPStackServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'arimolzer');
-        // $this->loadViewsFrom(__DIR__.'/../resources/views', 'arimolzer');
-        // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        // $this->loadRoutesFrom(__DIR__.'/routes.php');
-
         // Publishing is only necessary when using the CLI.
         if ($this->app->runningInConsole()) {
             $this->bootForConsole();
@@ -60,23 +55,5 @@ class IPStackServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../config/ipstack.php' => config_path('ipstack.php'),
         ], 'ipstack.config');
-
-        // Publishing the views.
-        /*$this->publishes([
-            __DIR__.'/../resources/views' => base_path('resources/views/vendor/arimolzer'),
-        ], 'ipstack.views');*/
-
-        // Publishing assets.
-        /*$this->publishes([
-            __DIR__.'/../resources/assets' => public_path('vendor/arimolzer'),
-        ], 'ipstack.assets');*/
-
-        // Publishing the translation files.
-        /*$this->publishes([
-            __DIR__.'/../resources/lang' => resource_path('lang/vendor/arimolzer'),
-        ], 'ipstack.lang');*/
-
-        // Registering package commands.
-        // $this->commands([]);
     }
 }
