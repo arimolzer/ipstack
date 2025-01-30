@@ -4,6 +4,7 @@ namespace Arimolzer\IPStack;
 
 use Arimolzer\IPStack\Exceptions\InvalidIPAddressFormatException;
 use Arimolzer\IPStack\Exceptions\IPStackAPIException;
+use Arimolzer\IPStack\Exceptions\IPStackHydrationException;
 use Arimolzer\IPStack\Objects\IPStackLookup;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
@@ -74,6 +75,7 @@ class IPStack
      * @param string $ip
      * @return IPStackLookup
      * @throws GuzzleException|IPStackAPIException|InvalidIPAddressFormatException
+     * @throws IPStackHydrationException
      */
     public function get(string $ip): IPStackLookup
     {
@@ -84,6 +86,7 @@ class IPStack
         $responseBody = json_decode($response->getBody()->getContents(), true);
 
         if ($this->responseWasSuccessful($responseBody)) {
+
             return new IPStackLookup($responseBody);
         }
 

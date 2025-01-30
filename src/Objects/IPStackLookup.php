@@ -2,6 +2,8 @@
 
 namespace Arimolzer\IPStack\Objects;
 
+use Arimolzer\IPStack\Exceptions\IPStackHydrationException;
+
 class IPStackLookup
 {
     protected string $ip;
@@ -23,27 +25,35 @@ class IPStackLookup
     protected ?string $connectionType;
     protected IPStackLocation $location;
 
+    /**
+     * @throws IPStackHydrationException
+     */
     public function __construct(array $data)
     {
-        $this->ip = $data['ip'];
-        $this->type = $data['type'];
-        $this->continentCode = $data['continent_code'];
-        $this->continentName = $data['continent_name'];
-        $this->countryCode = $data['country_code'];
-        $this->countryName = $data['country_name'];
-        $this->regionCode = $data['region_code'];
-        $this->regionName = $data['region_name'];
-        $this->city = $data['city'];
-        $this->zip = $data['zip'];
-        $this->latitude = $data['latitude'];
-        $this->longitude = $data['longitude'];
-        $this->msa = $data['msa'] ?? null;
-        $this->dma = $data['dma'] ?? null;
-        $this->radius = $data['radius'] ?? null;
-        $this->ipRoutingType = $data['ip_routing_type'] ?? null;
-        $this->connectionType = $data['connection_type'] ?? null;
+        try {
+            $this->ip = $data['ip'];
+            $this->type = $data['type'];
+            $this->continentCode = $data['continent_code'];
+            $this->continentName = $data['continent_name'];
+            $this->countryCode = $data['country_code'];
+            $this->countryName = $data['country_name'];
+            $this->regionCode = $data['region_code'];
+            $this->regionName = $data['region_name'];
+            $this->city = $data['city'];
+            $this->zip = $data['zip'];
+            $this->latitude = $data['latitude'];
+            $this->longitude = $data['longitude'];
+            $this->msa = $data['msa'] ?? null;
+            $this->dma = $data['dma'] ?? null;
+            $this->radius = $data['radius'] ?? null;
+            $this->ipRoutingType = $data['ip_routing_type'] ?? null;
+            $this->connectionType = $data['connection_type'] ?? null;
 
-        $this->location = new IPStackLocation($data['location']);
+            $this->location = new IPStackLocation($data['location']);
+
+        } catch (\Throwable $e) {
+            throw new IPStackHydrationException();
+        }
     }
 
     public function getIP(): string

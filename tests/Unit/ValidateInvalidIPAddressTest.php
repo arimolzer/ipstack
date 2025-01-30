@@ -5,10 +5,8 @@ class ValidateInvalidIPAddressTest extends \Arimolzer\IPStack\Tests\IPStackTestC
 {
     public function test_invalid_ip_address_exception()
     {
-        $this->assertThrows(function () {
+        $this->expectException(\Arimolzer\IPStack\Exceptions\IPStackHydrationException::class);
 
-            $this->ipStackService->get('127.0.0.1');
-
-        }, \Arimolzer\IPStack\Exceptions\IPStackHydrationException::class);
+        $this->ipStackService->get('127.0.0.1');
     }
 }

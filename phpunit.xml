@@ -6,7 +6,7 @@
     </testsuite>
   </testsuites>
   <php>
-    <env name="IPSTACK_API_KEY" />
+    <env name="IPSTACK_API_KEY" value="%IPSTACK_API_KEY%" />
   </php>
   <source>
     <include>
