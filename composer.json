@@ -12,7 +12,8 @@
     "homepage": "https://github.com/arimolzer/ipstack",
     "keywords": ["Geolocation", "IPStack", "IP Address Lookup"],
     "require": {
-        "illuminate/support": "~9|~10|~11"
+        "illuminate/support": "~9|~10|~11",
+        "guzzlehttp/guzzle": "~7"
     },
     "require-dev": {
         "phpunit/phpunit": "~9|~10|~11",
