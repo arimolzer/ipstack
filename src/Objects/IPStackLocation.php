@@ -17,7 +17,7 @@ class IPStackLocation
     {
         $this->geonameId = $data['geoname_id'];
         $this->capital = $data['capital'];
-        $this->languages = array_map(fn($lang) => new IPStackLanguage($lang), $data['languages']);
+        $this->languages = array_map(fn ($lang) => new IPStackLanguage($lang), $data['languages']);
         $this->countryFlag = $data['country_flag'];
         $this->countryFlagEmoji = $data['country_flag_emoji'];
         $this->countryFlagEmojiUnicode = $data['country_flag_emoji_unicode'];

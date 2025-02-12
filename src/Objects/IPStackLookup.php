@@ -50,7 +50,6 @@ class IPStackLookup
             $this->connectionType = $data['connection_type'] ?? null;
 
             $this->location = new IPStackLocation($data['location']);
-
         } catch (\Throwable $e) {
             throw new IPStackHydrationException();
         }
