@@ -1,21 +1,51 @@
 # IPStack
 
-[![Latest Version on Packagist][ico-version]][link-packagist]
-[![Total Downloads][ico-downloads]][link-downloads]
-[![Build Status][ico-travis]][link-travis]
-[![StyleCI][ico-styleci]][link-styleci]
+![Build Status](https://github.com/arimolzer/ipstack/actions/workflows/run-tests.yml/badge.svg)
+![StyleCI](https://github.styleci.io/repos/924614295/shield)
 
-This is where your description should go. Take a look at [contributing.md](contributing.md) to see a to do list.
+This package has been created as a simple facade to access the [IPStack](https://ipstack.com/) API. 
+
+Take a look at [contributing.md](contributing.md) to see a to do list.
 
 ## Installation
 
-Via Composer
+Getting started with IPStack is easy, first install the package via Composer:
 
 ```bash
 composer require arimolzer/ipstack
 ```
 
+Then, optionally, publish the package configuration. 
+
+```bash
+php artisan vendor:publish --provider="Arimolzer\IPStack\IPStackServiceProvider"
+```
+
+Then, you can set your environmental variables:
+
+| Variable                   | Description                                                  | Default                  |
+|----------------------------|--------------------------------------------------------------|--------------------------| 
+| IPSTACK_API_KEY            | API Key For IP Stack                                         | `null`                   |
+| IPSTACK_BASE_URI           | Base URL for the API                                         | https://api.ipstack.com/ |
+| IPSTACK_DEFAULT_TESTING_IP | The default IP to be used by tests for a successful response | 134.201.250.155          |
+
+
 ## Usage
+
+To lookup the geolocation of a single IP address:
+```php
+use \Arimolzer\IPStack\Facades\IPStack;
+
+IPStack::get('134.201.250.155')
+```
+
+To lookup multiple IP Addresses. 
+> [!IMPORTANT]
+> The 'Professional' subscription tier is required to access the bulk endpoint.
+
+```php
+IPStack::getBulk(['134.201.250.155' ,'72.229.28.185', '110.174.165.78'])
+```
 
 ## Change log
 
@@ -33,25 +63,12 @@ Please see [contributing.md](contributing.md) for details and a todolist.
 
 ## Security
 
-If you discover any security related issues, please email author@email.com instead of using the issue tracker.
+If you discover any security related issues, please email ari.molzer@molzertech.com instead of using the issue tracker.
 
 ## Credits
 
-- [Author Name][link-author]
-- [All Contributors][link-contributors]
+- [Ari Molzer](https://github.com/arimolzer)
+- [All Contributors](https://github.com/arimolzer/ipstack/graphs/contributors)
 
 ## License
-
 MIT. Please see the [license file](license.md) for more information.
-
-[ico-version]: https://img.shields.io/packagist/v/arimolzer/ipstack.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/arimolzer/ipstack.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/arimolzer/ipstack/master.svg?style=flat-square
-[ico-styleci]: https://styleci.io/repos/12345678/shield
-
-[link-packagist]: https://packagist.org/packages/arimolzer/ipstack
-[link-downloads]: https://packagist.org/packages/arimolzer/ipstack
-[link-travis]: https://travis-ci.org/arimolzer/ipstack
-[link-styleci]: https://styleci.io/repos/12345678
-[link-author]: https://github.com/arimolzer
-[link-contributors]: ../../contributors

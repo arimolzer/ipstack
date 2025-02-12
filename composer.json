@@ -5,7 +5,7 @@
     "authors": [
         {
             "name": "Ari Molzer",
-            "email": "ari@molzertech.com",
+            "email": "ari.molzer@molzertech.com",
             "homepage": "https://www.arimolzer.com"
         }
     ],
@@ -38,5 +38,8 @@
                 "IPStack": "Arimolzer\\IPStack\\Facades\\IPStack"
             }
         }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
     }
 }
