@@ -20,18 +20,18 @@ abstract class IPStackTestCase extends TestCase
     }
 
     /**
-     * @param Application $app
+     * @param  Application  $app
      * @return class-string[]
      */
     protected function getPackageProviders($app): array
     {
         return [
-            \Arimolzer\IPStack\IPStackServiceProvider::class
+            \Arimolzer\IPStack\IPStackServiceProvider::class,
         ];
     }
 
     /**
-     * @param Application $app
+     * @param  Application  $app
      * @return class-string[]
      */
     protected function getPackageAliases($app): array

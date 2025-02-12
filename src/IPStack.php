@@ -18,13 +18,14 @@ class IPStack
     {
         $this->client = new Client([
             'base_uri' => config('ipstack.base_uri'),
-            'errors' => false
+            'errors' => false,
         ]);
     }
 
     /**
-     * @param array $ips
+     * @param  array  $ips
      * @return Collection
+     *
      * @throws GuzzleException|IPStackAPIException|InvalidIPAddressFormatException
      */
     public function getBulk(array $ips): Collection
@@ -42,7 +43,8 @@ class IPStack
         $IPStackResponses = collect();
 
         if ($this->responseWasSuccessful($responseBody)) {
-            array_map(fn($result) => $IPStackResponses->push(new IPStackLookup($result)), $responseBody);
+            array_map(fn ($result) => $IPStackResponses->push(new IPStackLookup($result)), $responseBody);
+
             return $IPStackResponses;
         }
 
@@ -50,8 +52,9 @@ class IPStack
     }
 
     /**
-     * @param string|array $ips
+     * @param  string|array  $ips
      * @return void
+     *
      * @throws InvalidIPAddressFormatException
      */
     private function validateIpAddress(string|array $ips): void
@@ -65,15 +68,16 @@ class IPStack
                 $this->validateIpAddress($ip);
             }
         } else {
-            if (!preg_match($ipv4Pattern, $ips) && !preg_match($ipv6Pattern, $ips)) {
+            if (! preg_match($ipv4Pattern, $ips) && ! preg_match($ipv6Pattern, $ips)) {
                 throw new InvalidIPAddressFormatException($ips);
             }
         }
     }
 
     /**
-     * @param string $ip
+     * @param  string  $ip
      * @return IPStackLookup
+     *
      * @throws GuzzleException|IPStackAPIException|InvalidIPAddressFormatException
      * @throws IPStackHydrationException
      */
@@ -86,7 +90,6 @@ class IPStack
         $responseBody = json_decode($response->getBody()->getContents(), true);
 
         if ($this->responseWasSuccessful($responseBody)) {
-
             return new IPStackLookup($responseBody);
         }
 
@@ -97,21 +100,22 @@ class IPStack
      * IPStack responses always return a HTTP200 response. Instead, the response code is included as part of the payload
      * if the request was unsuccessful. This method checks if the response was successful, and if not, throws an
      * appropriate exception.
-     * https://ipstack.com/documentation#errors
+     * https://ipstack.com/documentation#errors.
      *
-     * @param array $responseBody
+     * @param  array  $responseBody
      * @return bool
      */
     private function responseWasSuccessful(array $responseBody): bool
     {
         // Check if the request was successful.
         // Strangely, the 'success' key only exists if the request was unsuccessful.
-        return !array_key_exists('success', $responseBody);
+        return ! array_key_exists('success', $responseBody);
     }
 
     /**
-     * @param array $responseBody
+     * @param  array  $responseBody
      * @return void
+     *
      * @throws IPStackAPIException
      */
     private function handleUnsuccessfulResponseStatusCode(array $responseBody): void

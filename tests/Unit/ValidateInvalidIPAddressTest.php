@@ -1,6 +1,5 @@
 <?php
 
-
 class ValidateInvalidIPAddressTest extends \Arimolzer\IPStack\Tests\IPStackTestCase
 {
     public function test_invalid_ip_address_exception()
