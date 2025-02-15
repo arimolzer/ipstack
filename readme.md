@@ -2,6 +2,7 @@
 
 ![Build Status](https://github.com/arimolzer/ipstack/actions/workflows/run-tests.yml/badge.svg)
 ![StyleCI](https://github.styleci.io/repos/924614295/shield)
+![Packagist](https://img.shields.io/packagist/dt/arimolzer/ipstack)
 
 This package has been created as a simple facade to access the [IPStack](https://ipstack.com/) API. 
 
@@ -32,6 +33,7 @@ Then, you can set your environmental variables:
 
 ## Usage
 
+#### Single IP Lookup
 To lookup the geolocation of a single IP address:
 ```php
 use \Arimolzer\IPStack\Facades\IPStack;
@@ -39,7 +41,8 @@ use \Arimolzer\IPStack\Facades\IPStack;
 IPStack::get('134.201.250.155')
 ```
 
-To lookup multiple IP Addresses. 
+#### Bulk IP Address lookup
+IP Stack supports bulk IP lookups, with a maximum of 50 addresses. Simply pass through an array of IP addresses to the `getBulk` method. 
 > [!IMPORTANT]
 > The 'Professional' subscription tier is required to access the bulk endpoint.
 
